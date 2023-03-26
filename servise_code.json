@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "small-talk-ayte",
+  "private_key_id": "2cee943ceaf43d2aa56c1e9b3034bd8da8157cb5",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDkM/a3IP7l3c2t\nMzZDNfvyXVbfuWByfmA1u2M8KFSNSvKxWMI0fLsxvVtKC2jb9KioB5ewr6ycham8\nxK2cP/Mt3v7wUzOHhXvwuPaBwzq7prw1MioMCXYQCTRsXqq05U3B0i5NRD8gQObJ\nFoj1mYbNSNTagZeo583AMcz1jt6qIHaP3vvKCwWpwBmzCjjHV8MJwY5UhFb0Yc6V\ni3MyMVgOHgy6Z1l9W960LUCH1t93//Ze01yLlFPF4cjCwG+yzhC0aOIFliOU/Dp+\n8wtwePm/VlR3cYbuERUVYQ1l+LJWNRz52w2/MKQ+DHs5VvRzhv4tSCuuasAiBuDp\nP/VHXCsnAgMBAAECggEAIVcyOYk5lI32adKsn984Qy297ovf+npaRh9tnTFrQQVt\nNdn47cA3fUnkF4pZNKGnLn2FfQv9lRS2Ot0lXEm/lrkY2DXftnIbLI1pfoXug9IV\nd1Qv7nhHZophvV+LY0iJNsMlfqZ07pps3X5MXk2i80UrzAzZApVzaxwbjNjl0UcM\nSFyGIhy5zXhlkg1brv3xhWmgxrymzkoQ4twqLpdbF88NXG5hhIgEkRfWBstdsw8f\nBskH+55G+a6FG2Y38MpZoJptkyrcrV/G/OQNrsLD/jNp8p9Ke2wY81RXAdtTWzDi\nPt4rVMNjmyqefsNyNB+r/ZKhGBjPxWvoJNREej3yuQKBgQD128gQ9PXIl4bfzVC4\nK8sRZbWzzPXcrYvIquZ4fUbGO2EDtTfftYxLC5cwb2Zuvg70L/KYzevdgEcxlVLE\nCRRUUqsEKgMxdw9CZgHxsbC7Ou3b2zPqaMoLdCR/JLV35l2GlYns4jHlgWtWUBMj\nFwYytz2T4peJcj/4g24EMEXGtQKBgQDtnb4/HWiNFnFKg+zX1roa6zbeBa/bVL4J\nNQYBE5M7CGTvQqHhtPKLlMph8fSH+b0w+WCLJkUsnU/5pj2yUfFIX9CvKQRyCzK2\n5YAEd9a96qMFB0J5gPUbjvfH63vSxDcodXhzv2D23kH41uzmJZ3oVGrTZhG6AlIO\nGlv5GPKX6wKBgQDRnaUh7/huIeL4hVDA9XWZS6JzvdgRYlW/rRX6vLTO5ml8g9Ez\nhtIqWaN5xEENQjX1s7ue1FK481m/yJRcV3Fhw2nTjw5R6jS0Y8xciScpOsD5phbJ\nULaStV84l8+wflRXHsANm3z3NDSTzonCbSr3qotxvst8gFBSTZxLLe0P0QKBgQCz\nLlykI30Px3ivBES5jkbQvcamLguqjYCwWLeqYCSKQ445jjmchmLQNudWbKpFT2IH\naEYRKE7JkecZDu8/ZONZ/EbVj0y24xLfMLkUpXndxO4hgJP0I/axTWIz87NwAF7H\nt62ZOxvXjUqaZxhFhOBKrj3QJAwCBHX0BJSOhu2I+QKBgQDx/0ryEND2QH+gpiiA\nRd8dYyekorniuSJhMiLsHSViF1EbqHN1kYZyANEMi/GMuAIi8T3MtGx8dqI3INaw\n2o4CLzPPHi8elwTHyIZji/+dloroYiXu59yneimC9FcEdIDGxIxFl4roQLYP/chb\njumJ8+vPAOrycJ2oPlzvSjCg8g==\n-----END PRIVATE KEY-----\n",
+  "client_email": "deltasmalltalking@small-talk-ayte.iam.gserviceaccount.com",
+  "client_id": "112438328565428671907",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/deltasmalltalking%40small-talk-ayte.iam.gserviceaccount.com"
+}
