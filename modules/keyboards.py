@@ -64,5 +64,18 @@ def button_languages():
     lang = types.InlineKeyboardMarkup(row_width=2)
     russian_lang = types.InlineKeyboardButton('Русский', callback_data='ru')
     english_lang = types.InlineKeyboardButton('Английский', callback_data='en')
-    lang.add(russian_lang, english_lang)
+    franc_lang = types.InlineKeyboardButton('Французский', callback_data='fr')
+    lang.add(russian_lang, english_lang, franc_lang)
     return lang
+
+#[Админ меню] =================================================================
+def admin_button_class():
+    admin = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    create_class_school = types.KeyboardButton(text='Создать класс учеников')
+    create_advertisement = types.KeyboardButton(text='Создать рассылку')
+    create_class_les = types.KeyboardButton(text='Создать расписание класса')
+    create_cafe_les = types.KeyboardButton(text='Создать расписание столовой')
+    update_les_class = types.KeyboardButton(text='Изменить расписание класса')
+    exit_admin = types.KeyboardButton(text='Покинуть Админ-Панель')
+    admin.add(create_class_school, create_advertisement,create_class_les, create_cafe_les, update_les_class, exit_admin)
+    return admin

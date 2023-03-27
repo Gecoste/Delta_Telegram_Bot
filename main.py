@@ -4,14 +4,14 @@ from aiogram.utils import executor
 from aiogram.dispatcher import Dispatcher
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 import sqlite3
-from modules import config, body, basedate, modulemath
+from modules import config, body, basedate, generate
 from google.cloud import dialogflow #Модуль DialogFlow
 
 storage = MemoryStorage()
 bot = Bot(token=config.TELEGRAM_API_KEY, parse_mode=types.ParseMode.HTML)
 dp = Dispatcher(bot, storage=storage)
 
-path = 'F:\Delta\servise_code.json'
+path = 'servise_code.json'
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"]=path #Относительный путь к json файлу приват-ключа
 
 session_client = dialogflow.SessionsClient() #Сессия клиента
@@ -20,9 +20,10 @@ session_id = 'sessions' #Указываем любое значение, в мо
 language_code = 'ru' #Язык русский
 session = session_client.session_path(project_id, session_id) #Объявляем сессию по айди проекта и айди сессии
 
+bd = basedate.BASADATA()
 
 body.register_handlers(dp)
-modulemath.register_handlers(dp)
+generate.register_handlers(dp)
 
 @dp.message_handler() #Хендлер без блока commands
 async def ch_dialogflow(message: types.Message): #Асинк функция с атрибутом message

@@ -8,12 +8,13 @@ from aiogram.dispatcher import FSMContext
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.dispatcher.filters import Command
 from aiogram.dispatcher.filters.state import State, StatesGroup
-from modules import config, keyboards, weather, basedate, modulemath
+from modules import config, keyboards, weather, basedate, generate
 import requests, json
 from bs4 import BeautifulSoup as BS
 import wikipedia
 from googletrans import Translator
 import qrcode
+import pyjokes
 
 #[Регистр классов состояния] =================================================================
 class Weather(StatesGroup):
@@ -40,13 +41,14 @@ bot = Bot(token=config.TELEGRAM_API_KEY, parse_mode=types.ParseMode.HTML)
 dp = Dispatcher(bot, storage=storage)
 translator = Translator()
 
+
 #[/start] =================================================================
 
 async def send_welcome(message: types.Message):
     await bot.send_message(message.chat.id,
 """
 Привет!
-Я готов к работе.
+Я готова к работе.
 Давай пообщаемся?
 
 Автор: @raizyxadev
@@ -92,6 +94,7 @@ async def helps(message: types.Message):
     <b>1. /start </b> - Откроется основное меню, в котором вы увидите кнопки (Технической поддержки,Школьное меню, Ваш профиль и тд)
     <b>2. /weather </b> - Расскажу вам о погоде на данный момент в любом городе мира (Я реагирую не только на команду, но и на текст: Погода, Покажи погоду)
     <b>3. /profile </b> - Покажу вам ваш профиль, в котором отображается статус, класс и многое другое (Я реагирую не только на команду, но и на текст: Профиль, Покажи профиль)
+    <b>4. /calculator </b> - Открою для вас калькулятор с огромным функционалом (Я реагирую не только на команду, но и на текст: Калькулятор)
     """)
 
 #[Парсинг бразуера,ютуба на наличие информации] =================================================================
@@ -209,10 +212,23 @@ async def result_qrcode(message: types.Message, state: FSMContext):
     os.remove('qrcode.png')
     await state.finish()
 
+#[Генератор анекдотов] =================================================================
+
+async def generate_jokes(message: types.Message):
+    joke = pyjokes.get_joke()
+    await bot.send_message(chat_id=message.chat.id, text=f"{message.from_user.mention}, я сгенерировала для вас очень интересный анекдот: {translator.translate(text=joke, dest='ru').text}")
+
+#[Панель администратора] =================================================================
+async def open_admin_panel(message: types.Message):
+    if str(message.from_user.id) in config.ADMIN_USER:
+        await bot.send_message(chat_id=message.chat.id, text=f"{message.from_user.mention}, вы зашли в панель администратора", reply_markup=keyboards.admin_button_class())
+
+
 #[Регистр переменных] =================================================================
 
 reason = ''
 result_translate_text = ''
+
 
 #[Регистр Хандлеров] =================================================================
 def register_handlers(dp : Dispatcher):
@@ -224,6 +240,7 @@ def register_handlers(dp : Dispatcher):
     dp.register_message_handler(helps, commands=['help'])
     dp.register_message_handler(print_weather, state=Weather.weth)
     dp.register_message_handler(search_info,text='Поиск информации')
+    dp.register_message_handler(generate_jokes, text=['Анекдот', 'Напиши Анекдот'])
     dp.register_message_handler(katalog_search_info, state=Search.srch)
     dp.register_message_handler(select_search_info, state=Search.select)
     dp.register_message_handler(new_added_user, content_types=["new_chat_members"])
@@ -235,4 +252,5 @@ def register_handlers(dp : Dispatcher):
     dp.register_message_handler(result_support_info, state=Support.select_reason)
     dp.register_message_handler(transtale_text_load, state=Translate_text_state.select_text_in)
     dp.register_message_handler(result_qrcode, state=qrcode_text_state.text_for_qrcode)
-    dp.register_callback_query_handler(callback_translate_func, text=['ru', 'en'])
+    dp.register_callback_query_handler(callback_translate_func, text=['ru', 'en', 'fr'])
+    dp.register_message_handler(open_admin_panel, text=['админ'])
