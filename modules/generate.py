@@ -27,7 +27,7 @@ async def callback_calculator_func(callback: types.CallbackQuery):
 
     elif data == 'tgs':
         try:
-            value_calculator = math.pow(float(value_calculator), 2)
+            value_calculator = math.tan(math.radians(float(value_calculator)))
             await bot.edit_message_text(chat_id=callback.message.chat.id, message_id=callback.message.message_id, text=value_calculator, reply_markup=keyboards.calc_button_class())
         except:
             await bot.edit_message_text(chat_id=callback.message.chat.id, message_id=callback.message.message_id, text='Произошла ошибка', reply_markup=keyboards.calc_button_class())
@@ -42,6 +42,13 @@ async def callback_calculator_func(callback: types.CallbackQuery):
     elif data == 'step':
         try:
             value_calculator = math.pow(float(value_calculator), 2)
+            await bot.edit_message_text(chat_id=callback.message.chat.id, message_id=callback.message.message_id, text=value_calculator, reply_markup=keyboards.calc_button_class())
+        except:
+            await bot.edit_message_text(chat_id=callback.message.chat.id, message_id=callback.message.message_id, text='Произошла ошибка', reply_markup=keyboards.calc_button_class())
+
+    elif data == 'coss':
+        try:
+            value_calculator = math.cos(math.radians(float(value_calculator)))
             await bot.edit_message_text(chat_id=callback.message.chat.id, message_id=callback.message.message_id, text=value_calculator, reply_markup=keyboards.calc_button_class())
         except:
             await bot.edit_message_text(chat_id=callback.message.chat.id, message_id=callback.message.message_id, text='Произошла ошибка', reply_markup=keyboards.calc_button_class())
@@ -74,4 +81,4 @@ def register_handlers(dp : Dispatcher):
     dp.register_message_handler(calculator, text='Калькулятор')
     dp.register_message_handler(calculator, commands=['calculator'])
     dp.register_message_handler(math_generator, text='генератор математической задачи')
-    dp.register_callback_query_handler(callback_calculator_func,text=['cancel','korn', 'step', 'tgs', 'clear', '7', '1', '2', '3', '0', '=', '+', '6', '5', '4', '8', '9', '*', '/', '-'])
+    dp.register_callback_query_handler(callback_calculator_func,text=['coss','cancel','korn', 'step', 'tgs', 'clear', '7', '1', '2', '3', '0', '=', '+', '6', '5', '4', '8', '9', '*', '/', '-'])

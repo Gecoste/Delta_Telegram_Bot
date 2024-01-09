@@ -1,9 +1,7 @@
 import os #Модуль для работы с операционной сис-мой
 import logging #Модуль для ведения журнала логов
-from googletrans import Translator
 from google.cloud import dialogflow #Модуль DialogFlow
-from aiogram import Bot, Dispatcher, executor, types #Модули аиограм
-from aiogram import types, Bot, Dispatcher
+from aiogram import types, Bot, Dispatcher, executor
 from aiogram.dispatcher import FSMContext
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.dispatcher.filters import Command
@@ -40,12 +38,13 @@ storage = MemoryStorage()
 bot = Bot(token=config.TELEGRAM_API_KEY, parse_mode=types.ParseMode.HTML)
 dp = Dispatcher(bot, storage=storage)
 translator = Translator()
-
+bd = basedate.BASADATA()
 
 #[/start] =================================================================
 
 async def send_welcome(message: types.Message):
-    await bot.send_message(message.chat.id,
+    if bd.find_user_table(id=message.from_user.id) is None:
+        await bot.send_message(message.chat.id,
 """
 Привет!
 Я готова к работе.
@@ -53,6 +52,12 @@ async def send_welcome(message: types.Message):
 
 Автор: @raizyxadev
 """, reply_markup= keyboards.start_button_class())
+    else:
+        await bot.send_message(chat_id=message.chat.id, text='''
+        Ого! Ты получается мой новый друг? 
+        Мне очень приятно с тобой пообщаться, но давай сначала пройдем регистрацию.
+        Напиши мне свое ФИО (например: Иванов Иван Иванович), если оно не существует в моем списке, то я не смогу тебя зарегистрировать :(
+        ''')
 
 #[Прогноз погоды] =================================================================
 
@@ -78,12 +83,16 @@ async def print_weather(message: types.Message, state: FSMContext):
 #[Профиль участника] =================================================================
 
 async def profile(message: types.Message):
-    await bot.send_message(message.chat.id, """
+
+    await bot.send_message(message.chat.id, f"""
     Профиль:
 
-    ID: 5124522006
-    Никнейм: raizyxadev
-    Баланс: 50.0 рублей
+    ID: {message.from_user.id}
+    ФИО: {message.from_user.full_name}
+    Ваша должность: ученик
+    Ваш класс: None
+    Вы состоите в кружке: None
+    
     <code> DELTA PRODUCT </code>
     """)
 
@@ -95,6 +104,7 @@ async def helps(message: types.Message):
     <b>2. /weather </b> - Расскажу вам о погоде на данный момент в любом городе мира (Я реагирую не только на команду, но и на текст: Погода, Покажи погоду)
     <b>3. /profile </b> - Покажу вам ваш профиль, в котором отображается статус, класс и многое другое (Я реагирую не только на команду, но и на текст: Профиль, Покажи профиль)
     <b>4. /calculator </b> - Открою для вас калькулятор с огромным функционалом (Я реагирую не только на команду, но и на текст: Калькулятор)
+    <b>5. /translate </b> - Переведу ваш текст на доступные языки: Английский, Русский, Китайский (Я реагирую не только на команду, но и на текст: )
     """)
 
 #[Парсинг бразуера,ютуба на наличие информации] =================================================================
@@ -102,7 +112,7 @@ async def search_info(message: types.Message):
     await bot.send_message(message.chat.id, text='Расскажите пожалуйста, что мне нужно для вас найти?')
     await Search.srch.set()
     
-async def katalog_search_info(message: types.Message, state: FSMContext):
+async def catalog_search_info(message: types.Message, state: FSMContext):
     await state.update_data(srch=message.text)
     data = await state.get_data()
 
@@ -223,25 +233,38 @@ async def open_admin_panel(message: types.Message):
     if str(message.from_user.id) in config.ADMIN_USER:
         await bot.send_message(chat_id=message.chat.id, text=f"{message.from_user.mention}, вы зашли в панель администратора", reply_markup=keyboards.admin_button_class())
 
+#[Расписание класса, столовой] =================================================================
+async def check_school_reason(message: types.Message):
+
+    await bot.send_message(chat_id=message.chat.id, text=f'Сейчас у вас по расписанию урок в кабинете . Расписание на завтрашний день')
 
 #[Регистр переменных] =================================================================
 
 reason = ''
 result_translate_text = ''
 
+#[Безопасный маршрут в школу] =============================================================+
+
+async def generate_school_road(msg: types.Message):
+    start = types.ReplyKeyboardMarkup()
+    kb = types.KeyboardButton('Отправить адрес', request_location=True)
+    start.add()
+
+    await bot.send_message(chat_id=msg.chat.id, text='Место мое', reply_markup=start)
 
 #[Регистр Хандлеров] =================================================================
 def register_handlers(dp : Dispatcher):
     dp.register_message_handler(send_welcome, commands=['start'])
     dp.register_message_handler(send_weather, commands=['weather'])
     dp.register_message_handler(send_weather, text=['Погода', 'погода'])
-    dp.register_message_handler(profile, text= 'Профиль', commands=['profile'])
+    dp.register_message_handler(profile, commands=['profile'])
+    dp.register_message_handler(profile, text=['📰 Профиль', 'Профиль'])
     dp.register_message_handler(helps, text= ['🔗 Помощь', 'Помощь', 'помощь'])
     dp.register_message_handler(helps, commands=['help'])
     dp.register_message_handler(print_weather, state=Weather.weth)
     dp.register_message_handler(search_info,text='Поиск информации')
     dp.register_message_handler(generate_jokes, text=['Анекдот', 'Напиши Анекдот'])
-    dp.register_message_handler(katalog_search_info, state=Search.srch)
+    dp.register_message_handler(catalog_search_info, state=Search.srch)
     dp.register_message_handler(select_search_info, state=Search.select)
     dp.register_message_handler(new_added_user, content_types=["new_chat_members"])
     dp.register_message_handler(reaction_sticker, content_types=["sticker"])
@@ -254,3 +277,5 @@ def register_handlers(dp : Dispatcher):
     dp.register_message_handler(result_qrcode, state=qrcode_text_state.text_for_qrcode)
     dp.register_callback_query_handler(callback_translate_func, text=['ru', 'en', 'fr'])
     dp.register_message_handler(open_admin_panel, text=['админ'])
+    dp.register_message_handler(check_school_reason, text=['💻Учебный процесс'])
+    dp.register_message_handler(generate_school_road, text=['маршрут'])

@@ -5,11 +5,12 @@ from aiogram.types import ReplyKeyboardRemove, ReplyKeyboardMarkup, KeyboardButt
 def start_button_class():
     start = types.ReplyKeyboardMarkup(resize_keyboard=True)
     search = types.KeyboardButton(text='Поиск информации', callback_data='search')
+    school_progress = types.KeyboardButton(text='💻Учебный процесс')
     support = types.KeyboardButton(text='🎧 Техническая поддержка')
     profile = types.KeyboardButton(text='📰 Профиль')
     faq = types.KeyboardButton(text='📔 F.A.Q проекта')
     helps = types.KeyboardButton(text='🔗 Помощь')
-    start.add(search, profile,faq, helps, support)
+    start.add(search, school_progress, profile, faq, helps, support)
     return start
     
 #[Калькулятор] =================================================================
@@ -79,3 +80,13 @@ def admin_button_class():
     exit_admin = types.KeyboardButton(text='Покинуть Админ-Панель')
     admin.add(create_class_school, create_advertisement,create_class_les, create_cafe_les, update_les_class, exit_admin)
     return admin
+
+#[Генерация матем. заданий] =================================================================
+
+def generate_keyboard_math():
+    gen_math = types.InlineKeyboardMarkup(row_width=1)
+    cancel = types.InlineKeyboardButton('Простые алгебраические примеры', callback_data='mathexamplealg')
+    sugidea = types.InlineKeyboardButton('Задания по геометрии', callback_data='sugidea')
+    wrerror = types.InlineKeyboardButton('', callback_data='wrerror')
+    gen_math.add()
+    return support
