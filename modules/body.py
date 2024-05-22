@@ -83,16 +83,12 @@ async def print_weather(message: types.Message, state: FSMContext):
 #[Профиль участника] =================================================================
 
 async def profile(message: types.Message):
-
-    await bot.send_message(message.chat.id, f"""
+    await bot.send_message(message.chat.id, """
     Профиль:
 
-    ID: {message.from_user.id}
-    ФИО: {message.from_user.full_name}
-    Ваша должность: ученик
-    Ваш класс: None
-    Вы состоите в кружке: None
-    
+    ID: 5124522006
+    Никнейм: raizyxadev
+    Баланс: 50.0 рублей
     <code> DELTA PRODUCT </code>
     """)
 
@@ -104,7 +100,6 @@ async def helps(message: types.Message):
     <b>2. /weather </b> - Расскажу вам о погоде на данный момент в любом городе мира (Я реагирую не только на команду, но и на текст: Погода, Покажи погоду)
     <b>3. /profile </b> - Покажу вам ваш профиль, в котором отображается статус, класс и многое другое (Я реагирую не только на команду, но и на текст: Профиль, Покажи профиль)
     <b>4. /calculator </b> - Открою для вас калькулятор с огромным функционалом (Я реагирую не только на команду, но и на текст: Калькулятор)
-    <b>5. /translate </b> - Переведу ваш текст на доступные языки: Английский, Русский, Китайский (Я реагирую не только на команду, но и на текст: )
     """)
 
 #[Парсинг бразуера,ютуба на наличие информации] =================================================================
@@ -235,15 +230,14 @@ async def open_admin_panel(message: types.Message):
 
 #[Расписание класса, столовой] =================================================================
 async def check_school_reason(message: types.Message):
-
-    await bot.send_message(chat_id=message.chat.id, text=f'Сейчас у вас по расписанию урок в кабинете . Расписание на завтрашний день')
+    await bot.send_message(chat_id=message.chat.id, text=f'{message.from_user.mention}, выберите из списка, что вы хотите узнать у меня, я вам с радостью все расскажу', reply_markup=keyboards)
 
 #[Регистр переменных] =================================================================
 
 reason = ''
 result_translate_text = ''
 
-#[Безопасный маршрут в школу] =============================================================+
+#[Безопасный маршрут в школу] =================================================================
 
 async def generate_school_road(msg: types.Message):
     start = types.ReplyKeyboardMarkup()
@@ -251,14 +245,12 @@ async def generate_school_road(msg: types.Message):
     start.add()
 
     await bot.send_message(chat_id=msg.chat.id, text='Место мое', reply_markup=start)
-
 #[Регистр Хандлеров] =================================================================
 def register_handlers(dp : Dispatcher):
     dp.register_message_handler(send_welcome, commands=['start'])
     dp.register_message_handler(send_weather, commands=['weather'])
     dp.register_message_handler(send_weather, text=['Погода', 'погода'])
-    dp.register_message_handler(profile, commands=['profile'])
-    dp.register_message_handler(profile, text=['📰 Профиль', 'Профиль'])
+    dp.register_message_handler(profile, text= 'Профиль', commands=['profile'])
     dp.register_message_handler(helps, text= ['🔗 Помощь', 'Помощь', 'помощь'])
     dp.register_message_handler(helps, commands=['help'])
     dp.register_message_handler(print_weather, state=Weather.weth)
