@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <img src='https://github.com/Gecoste/Gecoste/blob/main/assets/hender.gif'>
+  <h1>Наш помощник создан для государственной организации - МОУ СОШ №24</h1>
 </p>
 
 О нас: <br />
