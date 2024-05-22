@@ -1,7 +1,7 @@
 ### Открытый исходный код нашего ассистента - DELTA 👋
 
 <p align="center">
-  <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=AC65F7&center=true&vCenter=true&random=false&width=435&lines=Я+разработчик+Gecoste+Studio" alt="Typing SVG" /></a>
+  <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=AC65F7&center=true&vCenter=true&random=false&width=435&lines=Я+DELTA+ваш+виртуальный+помощник" alt="Typing SVG" /></a>
 </p>
 
 <p align="center">
