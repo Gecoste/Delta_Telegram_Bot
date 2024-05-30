@@ -13,6 +13,8 @@ import wikipedia
 from googletrans import Translator
 import qrcode
 import pyjokes
+from dotenv import load_dotenv
+
 
 #[Регистр классов состояния] =================================================================
 class Weather(StatesGroup):
@@ -34,8 +36,10 @@ class qrcode_text_state(StatesGroup):
 #[Основные переменные] =================================================================
 
 logging.basicConfig(level=logging.INFO) #Логгирование на уровне INFO
+
+load_dotenv()
 storage = MemoryStorage()
-bot = Bot(token=config.TELEGRAM_API_KEY, parse_mode=types.ParseMode.HTML)
+bot = Bot(token=os.getenv("TELEGRAM_API_KEY"), parse_mode=types.ParseMode.HTML)
 dp = Dispatcher(bot, storage=storage)
 translator = Translator()
 bd = basedate.BASADATA()
@@ -44,14 +48,13 @@ bd = basedate.BASADATA()
 
 async def send_welcome(message: types.Message):
     if bd.find_user_table(id=message.from_user.id) is None:
-        await bot.send_message(message.chat.id,
-"""
+        await bot.send_photo(chat_id=message.chat.id,caption="""
 Привет!
 Я готова к работе.
 Давай пообщаемся?
 
 Автор: @raizyxadev
-""", reply_markup= keyboards.start_button_class())
+""", reply_markup=keyboards.start_button_class(), photo=open("images/start_ico.png", "rb"))
     else:
         await bot.send_message(chat_id=message.chat.id, text='''
         Ого! Ты получается мой новый друг? 

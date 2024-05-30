@@ -4,9 +4,11 @@ from aiogram.utils import executor
 from aiogram.dispatcher import Dispatcher
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from modules import config, keyboards
+from dotenv import load_dotenv
 
+load_dotenv()
 storage = MemoryStorage()
-bot = Bot(token=config.TELEGRAM_API_KEY, parse_mode=types.ParseMode.HTML)
+bot = Bot(token=__import__('os').getenv("TELEGRAM_API_KEY"), parse_mode=types.ParseMode.HTML)
 dp = Dispatcher(bot, storage=storage)
 
 #[Код Калькулятора] =================================================================

@@ -4,13 +4,15 @@ from aiogram.utils import executor
 from aiogram.dispatcher import Dispatcher
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 import sqlite3
-from modules import config, body, basedate, generate
+from modules import body, basedate, generate
 from google.cloud import dialogflow #Модуль DialogFlow
 import openai
 from aiogram import md
+from dotenv import load_dotenv
 
+load_dotenv()
 storage = MemoryStorage()
-bot = Bot(token=config.TELEGRAM_API_KEY, parse_mode=types.ParseMode.HTML)
+bot = Bot(token=os.getenv("TELEGRAM_API_KEY"), parse_mode=types.ParseMode.HTML)
 dp = Dispatcher(bot, storage=storage)
 
 #path = 'servise_code.json'
