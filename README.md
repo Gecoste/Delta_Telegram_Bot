@@ -1,4 +1,10 @@
 ### Открытый исходный код нашего ассистента - DELTA 👋
+![PyPI](https://img.shields.io/pypi/v/clubhouse_api?color=orange) 
+![Python 3.6, 3.7, 3.8](https://img.shields.io/pypi/pyversions/clubhouse?color=blueviolet) 
+![Last  commit](https://img.shields.io/github/last-commit/Gecoste/Delta_Telegram_Bot
+) ![License](https://img.shields.io/github/license/Gecoste/Delta_Telegram_Bot
+)
+
 
 <p align="center">
   <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=AC65F7&center=true&vCenter=true&random=false&width=435&lines=Я+DELTA+ваш+виртуальный+помощник" alt="Typing SVG" /></a>
@@ -17,5 +23,19 @@
 - 🌱 Подскажет ответ на нужный вопрос <br />
 - 👯 Техническая поддержка <br />
 
-Чтобы установить все необходимые библиотеки, воспользуйтесь requirements.txt ("pip install requirements.txt") \
-Версия 0.5VET | Последнее обновление: 22.05.24г
+### Чтобы установить все необходимые библиотеки, воспользуйтесь requirements.txt
+
+```bash
+pip install requirements.txt
+```
+### Чтобы автоматизировать процесс, воспользуйтесь start.bat
+
+```bash
+open start.bat
+```
+
+## Лицензия
+
+Этот модуль загружен в открытый доступ по правилам [MIT License](https://opensource.org/license/mit)
+
+Версия 0.5alfa | Последнее обновление: 22.05.24г
